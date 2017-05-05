@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
+#define size 30
 
 int main()
 {
@@ -14,7 +15,7 @@ int main()
     if (childpid[0] == 0)
     {
         close(fileps[0]); //关闭读，只写
-        char s[] = "this is write by child1.\n";
+        char s[size] = "this is write by child1.\n";
         printf("child1\n");
         write(fileps[1], s, sizeof(s));
         exit(0); //退出子进程
@@ -26,9 +27,8 @@ int main()
     if (childpid[1] == 0)
     {
         close(fileps[0]);
-        char s[] = "this is write by child2.\n";
+        char s[size] = "this is write by child2.\n";
         printf("child2\n");
-        sleep(1);
         write(fileps[1], s, sizeof(s));
         exit(0);
     }else if(childpid[1]<0){
@@ -39,9 +39,8 @@ int main()
     if (childpid[2] == 0)
     {
         close(fileps[0]);
-        char s[] = "this is write by child3.\n";
+        char s[size] = "this is write by child3.\n";
         printf("child3\n");
-        sleep(2);
         write(fileps[1], s, sizeof(s));
         exit(0);
     }else if(childpid[2]<0){
@@ -49,15 +48,15 @@ int main()
     }
     close(fileps[1]); //关闭写，只读
 
-    char buf[90];
+    char buf[size];
     read(fileps[0], buf, sizeof(buf));
     printf("%s", buf);
     
-    char buf1[90];
+    char buf1[size];
     read(fileps[0], buf1, sizeof(buf1));
     printf("%s", buf1);
 
-    char buf2[90];
+    char buf2[size];
     read(fileps[0], buf2, sizeof(buf2));
     printf("%s", buf2);
     wait(0);
