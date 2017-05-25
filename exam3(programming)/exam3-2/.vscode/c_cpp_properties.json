@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "~/Desktop/linux-4.10.9/include",
+                "/usr/include",
+                "~/Desktop/linux-4.10.9/arch/arm/include"
+            ],
+            "defines": [],
+            "browse": {
+                "path": [
+                    "~/Desktop/linux-4.10.9/include",
+                    "/usr/include",
+                    "/usr/include/x86_64-linux-gnu"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            }
+        }
+    ]
+}
