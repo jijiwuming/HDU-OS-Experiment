@@ -33,9 +33,12 @@ void sender()
         sem_wait(&rec);
         printf("Enter your msg:");
         scanf("%s", msg.msg);
-        if (strncmp(msg.msg, "exit", 4) == 0)
+        if (strcmp(msg.msg, "exit") == 0)
         {
             strcpy(msg.msg,"end");
+            flag = 1;
+        }
+        if (strcmp(msg.msg, "end") == 0){
             flag = 1;
         }
         if (msgsnd(msgid, &msg, sizeof(struct message), 0) == -1)
@@ -77,7 +80,7 @@ void receive()
         };
         printf("receive msg:%s\n", msg.msg);
         sem_post(&rec);
-        if (strncmp(msg.msg, "end", 3) == 0)
+        if (strcmp(msg.msg, "end") == 0)
         {
             strcpy(msg.msg,"over");
             if (msgsnd(msgid, &msg, sizeof(struct message), 0) == -1){
